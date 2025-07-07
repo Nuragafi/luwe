@@ -3,6 +3,7 @@ import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/ui/components/resep_card.dart';
 import 'package:luwe/ui/components/search_bar.dart';
 import 'package:luwe/ui/view/home.dart';
+import 'package:luwe/ui/view/notification.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -13,7 +14,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int currentIndex = 0;
-  final pages = [const Home(), Home(), Home(), Home(), Home()];
+  final pages = [const Home(), Home(), Home(), Notif(), Home()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
