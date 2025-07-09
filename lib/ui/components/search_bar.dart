@@ -55,7 +55,7 @@ class CustomTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: hintStyle,
           contentPadding: const EdgeInsets.symmetric(
-            horizontal: 15,
+            horizontal: 40,
             vertical: 10,
           ),
           filled: true,
@@ -74,6 +74,7 @@ class CustomTextField extends StatelessWidget {
         inputFormatters: textFormatter,
         onChanged: onChanged,
         onFieldSubmitted: onSubmit,
+        onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );
   }

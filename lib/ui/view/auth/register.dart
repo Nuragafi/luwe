@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/components/search_bar.dart';
-import 'package:luwe/ui/view/auth/register.dart';
+import 'package:luwe/ui/view/auth/login.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  bool obs = true;
+class _RegisterState extends State<Register> {
+  bool obsPass = true;
+  bool obsVerif = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +26,7 @@ class _LoginState extends State<Login> {
               height: MediaQuery.of(context).size.height * 0.4,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/img/onboard-2.png'),
+                  image: AssetImage('assets/img/onboard-1.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -47,7 +48,7 @@ class _LoginState extends State<Login> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Login',
+                      'Register',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -55,6 +56,18 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    CustomTextField(
+                      height: 55,
+                      radius: 50,
+                      expands: true,
+                      fillColor: Color(0xFFEEEEEE),
+                      hintText: 'Nama Lengkap',
+                      hintStyle: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
                     CustomTextField(
                       height: 55,
                       radius: 50,
@@ -70,24 +83,51 @@ class _LoginState extends State<Login> {
                     CustomTextField(
                       height: 55,
                       radius: 50,
-                      obscureText: obs,
+                      obscureText: obsPass,
                       maxLines: 1,
                       suffixIcon: Padding(
                         padding: const EdgeInsets.only(right: 20),
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              obs = !obs;
+                              obsPass = !obsPass;
                             });
                           },
                           child: Icon(
-                            obs ? Icons.visibility : Icons.visibility_off,
+                            obsPass ? Icons.visibility : Icons.visibility_off,
                             color: ColorAsset.primary,
                           ),
                         ),
                       ),
                       fillColor: const Color(0xFFEEEEEE),
                       hintText: 'Password',
+                      hintStyle: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    CustomTextField(
+                      height: 55,
+                      radius: 50,
+                      obscureText: obsVerif,
+                      maxLines: 1,
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              obsVerif = !obsVerif;
+                            });
+                          },
+                          child: Icon(
+                            obsVerif ? Icons.visibility : Icons.visibility_off,
+                            color: ColorAsset.primary,
+                          ),
+                        ),
+                      ),
+                      fillColor: const Color(0xFFEEEEEE),
+                      hintText: 'Verifikasi Password',
                       hintStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
@@ -110,7 +150,7 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           child: const Text(
-                            'Login',
+                            'Register',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -126,15 +166,15 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Tidak memilii akun? ',
+                            'Sudah Punya akun? ',
                             style: TextStyle(fontSize: 14, color: Colors.black),
                           ),
                           InkWell(
                             onTap: () {
-                              Navigation().goRemove(const Register(), context);
+                              Navigation().goRemove(const Login(), context);
                             },
                             child: Text(
-                              'Buat Akun Baru',
+                              'Login',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Color(0xFF4DA1A9),

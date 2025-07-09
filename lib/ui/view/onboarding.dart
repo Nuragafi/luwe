@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/constant.dart';
 import 'package:luwe/core/utils/navigation.dart';
+import 'package:luwe/ui/view/auth/login.dart';
 import 'package:luwe/ui/view/dashboard.dart';
 
 class Onboarding extends StatefulWidget {
@@ -125,7 +126,9 @@ class _OnboardingState extends State<Onboarding> {
                       ),
                       Spacer(),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigation().goRemove(const Login(), context);
+                        },
                         child: Container(
                           height: 50,
                           width: 140,
