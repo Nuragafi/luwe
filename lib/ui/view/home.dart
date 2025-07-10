@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
+import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/components/resep_card.dart';
 import 'package:luwe/ui/components/search_bar.dart';
+import 'package:luwe/ui/view/detail_resep.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -74,7 +76,15 @@ class _HomeState extends State<Home> {
                 Wrap(
                   spacing: 25,
                   runSpacing: 25,
-                  children: List.generate(10, (index) => ResepCard()),
+                  children: List.generate(
+                    10,
+                    (index) => InkWell(
+                      onTap: () {
+                        Navigation().goPush(const DetailResep(), context);
+                      },
+                      child: ResepCard(),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 100),
               ],

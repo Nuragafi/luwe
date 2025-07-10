@@ -37,7 +37,7 @@ class _ProfilState extends State<Profil> {
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.black87,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
