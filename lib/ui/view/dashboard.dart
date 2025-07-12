@@ -5,6 +5,7 @@ import 'package:luwe/ui/components/search_bar.dart';
 import 'package:luwe/ui/view/home.dart';
 import 'package:luwe/ui/view/notification.dart';
 import 'package:luwe/ui/view/profil.dart';
+import 'package:luwe/ui/view/tambah.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -15,7 +16,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int currentIndex = 0;
-  final pages = [const Home(), Home(), Home(), Notif(), Profil()];
+  final pages = [const Home(), const Home(), const Notif(), const Profil()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +50,12 @@ class _DashboardState extends State<Dashboard> {
               onPressed: () => setState(() => currentIndex = 1),
             ),
             InkWell(
-              onTap: () => setState(() => currentIndex = 2),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Tambah()),
+                );
+              },
               child: Container(
                 width: 60,
                 height: 60,
@@ -64,21 +70,21 @@ class _DashboardState extends State<Dashboard> {
               icon: Icon(
                 Icons.notifications,
                 color:
-                    currentIndex == 3
+                    currentIndex == 2
                         ? ColorAsset.primary
                         : ColorAsset.lightGrey,
               ),
-              onPressed: () => setState(() => currentIndex = 3),
+              onPressed: () => setState(() => currentIndex = 2),
             ),
             IconButton(
               icon: Icon(
                 Icons.person,
                 color:
-                    currentIndex == 4
+                    currentIndex == 3
                         ? ColorAsset.primary
                         : ColorAsset.lightGrey,
               ),
-              onPressed: () => setState(() => currentIndex = 4),
+              onPressed: () => setState(() => currentIndex = 3),
             ),
           ],
         ),

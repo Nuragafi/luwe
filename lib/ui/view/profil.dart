@@ -9,148 +9,180 @@ class Profil extends StatefulWidget {
 }
 
 class _ProfilState extends State<Profil> {
-  Widget _buildProfileOption({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-        side: BorderSide(color: Colors.grey[400]!, width: 1.0),
-      ),
-      elevation: 0.0,
-      color: ColorAsset.white,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(15.0),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
-          child: Row(
-            children: [
-              Icon(icon, color: Colors.black54, size: 28),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 18),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorAsset.white,
+      appBar: AppBar(
+        backgroundColor: ColorAsset.white,
+        elevation: 0,
+        leading: const SizedBox(),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.logout, color: Colors.black),
+          ),
+        ],
+      ),
       body: Column(
         children: [
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
+          _buildProfilSection(),
+          _buildNavigationTabs(),
+          Expanded(child: _buildRecipeGrid()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfilSection() {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      color: ColorAsset.white,
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 80,
+            backgroundColor: Colors.blueGrey,
+            child: Icon(Icons.person, size: 75, color: Colors.white),
+          ),
+          SizedBox(height: 10),
+          Text(
+            'User',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent[100],
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            ),
+            child: Text('Edit Profil'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavigationTabs() {
+    return Container(
+      color: ColorAsset.white,
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                height: 280,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/img/onboard-3.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-
-              Container(
-                height: 280,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment(0.50, -0.00),
-                    end: Alignment(0.50, 1.00),
-                    colors: [
-                      Colors.white.withAlpha(0),
-                      Colors.white.withAlpha(0),
-                      Colors.white.withAlpha(200),
-                      Colors.white.withAlpha(255),
-                    ],
-                    stops: const [0.0, 0.5, 0.9, 1.0],
-                  ),
-                ),
-              ),
-
-              Positioned(
-                top: 170,
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 80,
-                      backgroundColor: Colors.grey[300],
-                      child: Icon(
-                        Icons.person,
-                        size: 80,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Profil',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _buildTabItem(Icons.room_service, 'Resep'),
+              _buildTabItem(Icons.bookmark, ' Favorit'),
+              _buildTabItem(Icons.favorite, 'like'),
             ],
           ),
+          const SizedBox(height: 10),
+          Divider(color: Colors.grey[300], thickness: 1, height: 0),
+        ],
+      ),
+    );
+  }
 
-          const SizedBox(height: 120),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+  Widget _buildTabItem(IconData icon, String text) {
+    return Expanded(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: Colors.grey[500], size: 20),
+              SizedBox(width: 5),
+              Text(text, style: TextStyle(color: Colors.black, fontSize: 16)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecipeGrid() {
+    final List<Map<String, String>> recipes = List.generate(
+      9,
+      (index) => {
+        'title': 'Nasi Goreng Ati Ampela',
+        'date': '20 Menit',
+        'image': 'https://picsum.photos/200/300?random=$index',
+      },
+    );
+
+    return GridView.builder(
+      padding: EdgeInsets.all(10),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 2,
+        mainAxisSpacing: 2,
+        childAspectRatio: 0.7,
+      ),
+      itemCount: recipes.length,
+      itemBuilder: (context, index) {
+        return _buildRecipeCard(
+          recipes[index]['title']!,
+          recipes[index]['date']!,
+          recipes[index]['image']!,
+        );
+      },
+    );
+  }
+
+  Widget _buildRecipeCard(String title, String date, String imageUrl) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 0,
+      child: Stack(
+        children: [
+          Positioned.fill(child: Image.network(imageUrl, fit: BoxFit.cover)),
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.transparent, Colors.black.withAlpha(6)],
+                  stops: [0.6, 1.0],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 8,
+            left: 8,
+            right: 8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildProfileOption(
-                  icon: Icons.info_outline,
-                  title: 'Edit Profile',
-                  onTap: () {
-                    print('edit ditekan');
-                  },
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 30),
-                _buildProfileOption(
-                  icon: Icons.bookmark_border,
-                  title: 'Tempat Favorit',
-                  onTap: () {
-                    print('Tempat Favorit Ditekan');
-                  },
-                ),
-                const SizedBox(height: 30),
-                _buildProfileOption(
-                  icon: Icons.help_outlined,
-                  title: 'Help',
-                  onTap: () {
-                    print('Help Ditekan');
-                  },
-                ),
-                const SizedBox(height: 30),
-                _buildProfileOption(
-                  icon: Icons.logout,
-                  title: 'Logout',
-                  onTap: () {
-                    print('Logout Ditekan');
-                  },
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(Icons.access_time, size: 16, color: Colors.white70),
+                    SizedBox(width: 4),
+                    Text(
+                      date,
+                      style: TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                  ],
                 ),
               ],
             ),
