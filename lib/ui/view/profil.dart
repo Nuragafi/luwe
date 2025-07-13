@@ -113,7 +113,8 @@ class _ProfilState extends State<Profil> {
       (index) => {
         'title': 'Nasi Goreng Ati Ampela',
         'date': '20 Menit',
-        'image': 'https://picsum.photos/200/300?random=$index',
+        'image':
+            'https://dcostseafood.id/wp-content/uploads/2021/12/Nasi-Goreng-Tom-Yum.jpg',
       },
     );
 
