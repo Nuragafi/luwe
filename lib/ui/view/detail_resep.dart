@@ -23,7 +23,7 @@ class _DetailResepState extends State<DetailResep> {
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: Text(
-          'Detal Resep',
+          'Detail Resep',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
