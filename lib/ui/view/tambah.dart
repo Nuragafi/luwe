@@ -130,27 +130,31 @@ class _TambahState extends State<Tambah> {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Fungsionalitas submit resep belum lengkap.',
-                      ),
-                    ),
-                  );
-                  print(
-                    'Tombol Submit ditekan. Fungsionalitas submit belum lengkap.',
-                  );
-                },
-                child: const Text(
-                  "Submit",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ),
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(25.0),
+        child: SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Fungsionalitas submit resep belum lengkap.'),
+                ),
+              );
+              print(
+                'Tombol Submit ditekan. Fungsionalitas submit belum lengkap.',
+              );
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF2E5077)),
+            child: const Text(
+              "Submit",
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
           ),
         ),
       ),
