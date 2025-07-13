@@ -48,7 +48,6 @@ class _TambahState extends State<Tambah> {
                       children: [
                         Icon(Icons.image, size: 40, color: Colors.grey[600]),
                         const SizedBox(height: 8),
-
                         Text(
                           'Ketuk Untuk Pilih Foto (Belum Aktif)',
                           style: TextStyle(color: Colors.grey[600]),
@@ -130,31 +129,34 @@ class _TambahState extends State<Tambah> {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Fungsionalitas submit resep belum lengkap.'),
+
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Fungsionalitas submit resep belum lengkap.',
+                        ),
+                      ),
+                    );
+                    print(
+                      'Tombol Submit ditekan. Fungsionalitas submit belum lengkap.',
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF2E5077),
+                  ),
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
-              );
-              print(
-                'Tombol Submit ditekan. Fungsionalitas submit belum lengkap.',
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF2E5077)),
-            child: const Text(
-              "Submit",
-              style: TextStyle(fontSize: 18, color: Colors.white),
-            ),
+              ),
+            ],
           ),
         ),
       ),
