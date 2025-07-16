@@ -16,14 +16,8 @@ class _DetailResepState extends State<DetailResep> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigation().goPush(const Home(), context);
-          },
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-        ),
         title: Text(
-          'Detal Resep',
+          'Detail Resep',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
