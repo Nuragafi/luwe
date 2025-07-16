@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/navigation.dart';
+
+Dio dio = Dio();
 
 double screenWidth([BuildContext? context]) =>
     MediaQuery.of(context ?? nav.nk.currentContext!).size.width;
@@ -23,4 +26,3 @@ Widget yHeight(double size, [BuildContext? context]) =>
 
 Widget xWidth(double size, [BuildContext? context]) =>
     SizedBox(width: rawWidth(size));
-

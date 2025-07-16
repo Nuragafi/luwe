@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:luwe/core/provider/auth_provider.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/navigation.dart';
-import 'package:luwe/ui/components/search_bar.dart';
+import 'package:luwe/core/utils/snackbar_helper.dart';
+import 'package:luwe/ui/components/custom_textfield.dart';
 import 'package:luwe/ui/view/auth/register.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,6 +16,24 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool obs = true;
+
+  bool emailValidation(String value) {
+    if (RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+    ).hasMatch(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  final formkey = GlobalKey<FormState>();
+
+  bool passValidate = true;
+  bool emailValidate = true;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +62,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 20),
             Form(
+              key: formkey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -56,21 +78,40 @@ class _LoginState extends State<Login> {
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
-                      height: 55,
+                      height: emailValidate ? 55 : 73,
                       radius: 50,
                       expands: true,
+                      controller: emailController,
                       fillColor: Color(0xFFEEEEEE),
                       hintText: 'Email',
                       hintStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          setState(() {
+                            emailValidate = false;
+                          });
+                          return 'Email tidak boleh kosong';
+                        } else if (!emailValidation(value)) {
+                          setState(() {
+                            emailValidate = false;
+                          });
+                          return 'Format email tidak valid';
+                        }
+                        setState(() {
+                          emailValidate = true;
+                        });
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
-                      height: 55,
+                      height: passValidate ? 55 : 73,
                       radius: 50,
                       obscureText: obs,
+                      controller: passwordController,
                       maxLines: 1,
                       suffixIcon: Padding(
                         padding: const EdgeInsets.only(right: 20),
@@ -92,12 +133,27 @@ class _LoginState extends State<Login> {
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password tidak boleh kosong';
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(height: 20),
                     Center(
                       child: InkWell(
                         onTap: () {
-                          // Handle login action
+                          if (formkey.currentState!.validate()) {
+                            Map<String, dynamic> request = {
+                              'email': emailController.text,
+                              'password': passwordController.text,
+                            };
+                            Provider.of<AuthProvider>(
+                              context,
+                              listen: false,
+                            ).login(request);
+                          }
                         },
                         child: Container(
                           height: 50,

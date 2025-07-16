@@ -1,0 +1,1 @@
+ F:\\kuliah\\Mobile\ Programming\\luwe\\.dart_tool\\flutter_build\\0d05ef7f05a7b63bac2699a6e9cca87a\\native_assets.json: 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:luwe/ui/view/dashboard.dart';
+import 'package:luwe/core/provider/auth_provider.dart';
+import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/view/splashscreen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +14,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Luwe',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: MaterialApp(
+        navigatorKey: nav.nk,
+        title: 'Luwe',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: const Splashscreen(),
       ),
-      home: const Splashscreen(),
     );
   }
 }

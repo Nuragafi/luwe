@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/ui/components/resep_card.dart';
-import 'package:luwe/ui/components/search_bar.dart';
+import 'package:luwe/ui/components/custom_textfield.dart';
 import 'package:luwe/ui/view/home.dart';
 import 'package:luwe/ui/view/notification.dart';
 import 'package:luwe/ui/view/profil.dart';
