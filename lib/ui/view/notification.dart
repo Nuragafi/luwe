@@ -17,6 +17,8 @@ class _NotifState extends State<Notif> {
       appBar: AppBar(
         title: Text('Notification'),
         backgroundColor: ColorAsset.white,
+        elevation: 0,
+        scrolledUnderElevation: 0.0,
       ),
       // body: SafeArea(child: Padding(padding: const EdgeInsets.all(16.0))),
       body: SafeArea(

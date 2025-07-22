@@ -23,6 +23,7 @@ class _ProfilState extends State<Profil> {
             icon: const Icon(Icons.logout, color: Colors.black),
           ),
         ],
+        scrolledUnderElevation: 0.0,
       ),
       body: Column(
         children: [
@@ -41,20 +42,20 @@ class _ProfilState extends State<Profil> {
       child: Column(
         children: [
           CircleAvatar(
-            radius: 80,
+            radius: 70,
             backgroundColor: Colors.blueGrey,
             child: Icon(Icons.person, size: 75, color: Colors.white),
           ),
           SizedBox(height: 10),
           Text(
             'User',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           ),
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent[100],
+              backgroundColor: ColorAsset.primary,
               foregroundColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -74,16 +75,28 @@ class _ProfilState extends State<Profil> {
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildTabItem(Icons.room_service, 'Resep'),
-              _buildTabItem(Icons.bookmark, ' Favorit'),
-              _buildTabItem(Icons.favorite, 'like'),
-            ],
+          Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: ColorAsset.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  spreadRadius: 0,
+                  blurRadius: 5,
+                  offset: Offset(0, 10), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildTabItem(Icons.room_service, 'Resep'),
+                _buildTabItem(Icons.bookmark, ' Favorit'),
+                _buildTabItem(Icons.favorite, 'like'),
+              ],
+            ),
           ),
-          const SizedBox(height: 10),
-          Divider(color: Colors.grey[300], thickness: 1, height: 0),
         ],
       ),
     );
@@ -119,12 +132,12 @@ class _ProfilState extends State<Profil> {
     );
 
     return GridView.builder(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 2,
-        mainAxisSpacing: 2,
-        childAspectRatio: 0.7,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 0.6,
       ),
       itemCount: recipes.length,
       itemBuilder: (context, index) {
@@ -138,57 +151,44 @@ class _ProfilState extends State<Profil> {
   }
 
   Widget _buildRecipeCard(String title, String date, String imageUrl) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 0,
-      child: Stack(
-        children: [
-          Positioned.fill(child: Image.network(imageUrl, fit: BoxFit.cover)),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withAlpha(6)],
-                  stops: [0.6, 1.0],
-                ),
-              ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'Nasi Goreng Ati Ampela',
+              style: TextStyle(fontSize: 12, color: ColorAsset.white),
             ),
-          ),
-          Positioned(
-            bottom: 8,
-            left: 8,
-            right: 8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(height: 5),
+            Row(
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                Icon(
+                  Icons.watch_later_outlined,
+                  color: ColorAsset.white,
+                  size: 10,
                 ),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    Icon(Icons.access_time, size: 16, color: Colors.white70),
-                    SizedBox(width: 4),
-                    Text(
-                      date,
-                      style: TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                  ],
+                SizedBox(width: 5),
+                Text(
+                  '20 Menit',
+                  style: TextStyle(fontSize: 8, color: ColorAsset.white),
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -19,9 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         navigatorKey: nav.nk,
         title: 'Luwe',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        ),
+        theme: ThemeData(fontFamily: 'Jakarta'),
         home: const Splashscreen(),
       ),
     );

@@ -170,6 +170,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "phosphor_flutter",
+      "rootUri": "file:///C:/Users/rafip/AppData/Local/Pub/Cache/hosted/pub.dev/phosphor_flutter-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///C:/Users/rafip/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6",
       "packageUri": "lib/",
@@ -308,7 +314,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-07-16T05:01:07.667599Z",
+  "generated": "2025-07-18T07:04:33.845117Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///C:/src/flutter3.29.3",

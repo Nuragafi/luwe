@@ -1,7 +1,6 @@
 class Routes {
   static const String _development = "https://2197f754a9a8.ngrok-free.app";
   static const String _endpoint = "$_development/api";
-  static const String _printEndpoint = _development;
 
   //---- ROUTES
 

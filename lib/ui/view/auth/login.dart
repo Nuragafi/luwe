@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/provider/auth_provider.dart';
 import 'package:luwe/core/utils/color_asset.dart';
+import 'package:luwe/core/utils/constant.dart';
 import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/core/utils/snackbar_helper.dart';
 import 'package:luwe/ui/components/custom_textfield.dart';
 import 'package:luwe/ui/view/auth/register.dart';
+import 'package:luwe/ui/view/dashboard.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -185,12 +187,39 @@ class _LoginState extends State<Login> {
                             'Tidak memilii akun? ',
                             style: TextStyle(fontSize: 14, color: Colors.black),
                           ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                           InkWell(
                             onTap: () {
-                              Navigation().goRemove(const Register(), context);
+                              Navigation().goReplace(const Register(), context);
                             },
                             child: Text(
                               'Buat Akun Baru',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF4DA1A9),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            '|',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 5),
+                          InkWell(
+                            onTap: () {
+                              Navigation().goRemove(const Dashboard(), context);
+                            },
+                            child: Text(
+                              'Masuk sebagai Guest',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Color(0xFF4DA1A9),

@@ -63,7 +63,7 @@ class _OnboardingState extends State<Onboarding> {
                     height: 1.2,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -134,7 +134,7 @@ class _OnboardingState extends State<Onboarding> {
                           width: 140,
                           alignment: Alignment.center,
                           decoration: ShapeDecoration(
-                            color: const Color(0xFF4DA1A9),
+                            color: ColorAsset.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18),
                             ),
