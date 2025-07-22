@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
+import 'package:luwe/core/utils/constant.dart';
+import 'package:luwe/core/utils/navigation.dart';
+import 'package:luwe/ui/view/auth/login.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -19,7 +22,9 @@ class _ProfilState extends State<Profil> {
         leading: const SizedBox(),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigation().goPush(const Login(), context);
+            },
             icon: const Icon(Icons.logout, color: Colors.black),
           ),
         ],
