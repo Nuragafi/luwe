@@ -1,4 +1,4 @@
-#Fri Jul 18 13:59:48 WIB 2025
+#Wed Jul 23 13:10:40 WIB 2025
 base.0=F\:\\kuliah\\Mobile Programming\\luwe\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=F\:\\kuliah\\Mobile Programming\\luwe\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=F\:\\kuliah\\Mobile Programming\\luwe\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
