@@ -15,7 +15,10 @@ class _DetailResepState extends State<DetailResep> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        backgroundColor: ColorAsset.white,
+        elevation: 3,
+        shadowColor: ColorAsset.lightGrey.withValues(alpha: 0.2),
+        surfaceTintColor: Colors.transparent,
         title: Text(
           'Detail Resep',
           style: TextStyle(fontWeight: FontWeight.bold),

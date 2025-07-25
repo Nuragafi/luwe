@@ -6,10 +6,11 @@ import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/components/resep_card.dart';
 import 'package:luwe/ui/components/custom_textfield.dart';
 import 'package:luwe/ui/view/auth/login.dart';
+import 'package:luwe/ui/view/explore.dart';
 import 'package:luwe/ui/view/home.dart';
 import 'package:luwe/ui/view/notification.dart';
 import 'package:luwe/ui/view/profil.dart';
-import 'package:luwe/ui/view/tambah.dart';
+import 'package:luwe/ui/view/tambah_resep.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class Dashboard extends StatefulWidget {
@@ -21,7 +22,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int currentIndex = 0;
-  final pages = [const Home(), const Home(), const Notif(), const Profil()];
+  final pages = [const Home(), const Explore(), const Notif(), const Profil()];
   @override
   void initState() {
     // if (storage.token == null) {
@@ -81,11 +82,12 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                if (storage.token != null) {
-                  Navigation().goPush(const Tambah(), context);
-                } else {
-                  Navigation().goPush(const Login(), context);
-                }
+                Navigation().goPush(const Tambah(), context);
+                // if (storage.token != null) {
+                //   Navigation().goPush(const Tambah(), context);
+                // } else {
+                //   Navigation().goPush(const Login(), context);
+                // }
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 15),

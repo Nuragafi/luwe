@@ -17,19 +17,17 @@ class _NotifState extends State<Notif> {
       appBar: AppBar(
         title: Text('Notification'),
         backgroundColor: ColorAsset.white,
-        elevation: 0,
-        scrolledUnderElevation: 0.0,
+        elevation: 3,
+        shadowColor: ColorAsset.lightGrey.withValues(alpha: 0.2),
+        surfaceTintColor: Colors.transparent,
       ),
-      // body: SafeArea(child: Padding(padding: const EdgeInsets.all(16.0))),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView.builder(
-            itemCount: 20,
-            itemBuilder: (context, index) {
-              return NotifCard();
-            },
-          ),
+        child: ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return NotifCard();
+          },
         ),
       ),
     );

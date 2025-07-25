@@ -26,20 +26,21 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.only(left: 30, top: 10),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Image.asset('assets/img/logo.png', height: 32),
+                  child: Image.asset('assets/img/logo.png', height: 30),
                 ),
               ),
-              const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: CustomTextField(
-                  height: 55,
-                  radius: 50,
-                  expands: true,
-                  fillColor: Color(0xFFEEEEEE),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
-                  hintText: 'Apa yang ingin anda masak hari ini?',
-                  hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
+                padding: const EdgeInsets.only(left: 30, top: 5),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Cari resep yg bikin kamu mood sekarang',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: ColorAsset.lightGrey,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -54,10 +55,7 @@ class _HomeState extends State<Home> {
                           index == 0
                               ? EdgeInsets.only(right: 10, left: 20)
                               : EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 5,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),

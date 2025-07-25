@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/navigation.dart';
+import 'package:luwe/ui/components/button.dart';
 import 'package:luwe/ui/view/auth/login.dart';
 
 class Profil extends StatefulWidget {
@@ -57,17 +58,15 @@ class _ProfilState extends State<Profil> {
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorAsset.primary,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                CustomButton(
+                  onTap: () {},
+                  radius: 30,
+                  width: 125,
+                  height: 45,
+                  child: Text(
+                    'Edit Profil',
+                    style: TextStyle(color: ColorAsset.white, fontSize: 16),
                   ),
-                  child: Text('Edit Profil'),
                 ),
               ],
             ),

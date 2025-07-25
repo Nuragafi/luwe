@@ -21,12 +21,15 @@ class CustomTextField extends StatelessWidget {
   final bool? expands;
   final TextStyle? hintStyle;
   final String? Function(String?)? validator;
+  final double? horizontalPadding;
+  final double? verticalPadding;
+  final TextInputType? keyboardType;
   const CustomTextField({
     super.key,
     this.controller,
     this.suffixIcon,
     this.prefixIcon,
-    this.height,
+    this.height = 50,
     this.width,
     this.obscureText,
     this.hintText,
@@ -40,12 +43,15 @@ class CustomTextField extends StatelessWidget {
     this.expands,
     this.hintStyle,
     this.validator,
+    this.horizontalPadding,
+    this.verticalPadding,
+    this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 50,
+      height: height,
       width: width,
       child: TextFormField(
         expands: expands ?? false,
@@ -56,9 +62,9 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: hintStyle,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 40,
-            vertical: 10,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding ?? 40,
+            vertical: verticalPadding ?? 10,
           ),
           filled: true,
           fillColor: fillColor,
@@ -81,6 +87,7 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
         ),
+        keyboardType: keyboardType,
         inputFormatters: textFormatter,
         onChanged: onChanged,
         onFieldSubmitted: onSubmit,

@@ -6,4 +6,5 @@ class ColorAsset {
   static Color lightGrey = const Color(0xFFC5C5C5);
   static Color white = const Color(0xFFFFFFFF);
   static Color grey = const Color(0xFFEEEEEE);
+  static Color textGrey = const Color(0xFF898989);
 }
