@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:luwe/core/provider/auth_provider.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/navigation.dart';
+import 'package:luwe/core/utils/snackbar_helper.dart';
 import 'package:luwe/ui/components/custom_textfield.dart';
 import 'package:luwe/ui/view/auth/login.dart';
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -14,6 +17,20 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   bool obsPass = true;
   bool obsVerif = true;
+  bool emailValidation(String value) {
+    if (RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+    ).hasMatch(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController verifyPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,25 +76,27 @@ class _RegisterState extends State<Register> {
                     CustomTextField(
                       height: 55,
                       radius: 50,
-                      expands: true,
                       fillColor: Color(0xFFEEEEEE),
                       hintText: 'Nama Lengkap',
                       hintStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      maxLines: 1,
+                      controller: nameController,
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
                       height: 55,
                       radius: 50,
-                      expands: true,
+                      maxLines: 1,
                       fillColor: Color(0xFFEEEEEE),
                       hintText: 'Email',
                       hintStyle: const TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      controller: emailController,
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
@@ -105,6 +124,7 @@ class _RegisterState extends State<Register> {
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      controller: passwordController,
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
@@ -132,12 +152,57 @@ class _RegisterState extends State<Register> {
                         fontSize: 14,
                         color: Colors.grey,
                       ),
+                      controller: verifyPasswordController,
                     ),
                     const SizedBox(height: 20),
                     Center(
                       child: InkWell(
                         onTap: () {
-                          // Handle login action
+                          if (!emailValidation(emailController.text)) {
+                            Snackbar.error('Format email tidak valid', context);
+                            return;
+                          }
+                          if (nameController.text.isEmpty) {
+                            Snackbar.error(
+                              'Nama lengkap tidak boleh kosong',
+                              context,
+                            );
+                            return;
+                          }
+                          if (passwordController.text.isEmpty) {
+                            Snackbar.error(
+                              'Password tidak boleh kosong',
+                              context,
+                            );
+                            return;
+                          }
+                          if (verifyPasswordController.text.isEmpty) {
+                            Snackbar.error(
+                              'Verifikasi password tidak boleh kosong',
+                              context,
+                            );
+                            return;
+                          }
+                          if (passwordController.text !=
+                              verifyPasswordController.text) {
+                            Snackbar.error(
+                              'Password dan verifikasi password tidak cocok',
+                              context,
+                            );
+                            return;
+                          }
+                          Map<String, dynamic> req = {
+                            'name': nameController.text,
+                            'email': emailController.text,
+                            'password': passwordController.text,
+                            'password_confirmation':
+                                verifyPasswordController.text,
+                          };
+
+                          Provider.of<AuthProvider>(
+                            context,
+                            listen: false,
+                          ).register(req);
                         },
                         child: Container(
                           height: 50,

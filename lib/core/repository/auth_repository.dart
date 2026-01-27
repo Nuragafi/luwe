@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+
 import 'package:luwe/core/utils/constant.dart';
 import 'package:luwe/core/utils/handler.dart';
+import 'package:luwe/core/utils/headers.dart';
 import 'package:luwe/core/utils/log_helper.dart';
+
 import 'package:luwe/core/utils/routes.dart';
 
 class AuthRepository {
@@ -12,7 +15,8 @@ class AuthRepository {
         data: FormData.fromMap(data),
       );
       if (response.statusCode == 201) {
-        return response.data;
+        Log("REGISTER RESPONSE => ${response.data}");
+        return response.data['data'];
       }
     } on DioException catch (e) {
       DioHandler(e).handler();
@@ -39,6 +43,17 @@ class AuthRepository {
       final response = await dio.post(Routes.logout);
       if (response.statusCode == 200) {
         return response.data;
+      }
+    } on DioException catch (e) {
+      DioHandler(e).handler();
+    }
+  }
+
+  static Future getProfile() async {
+    try {
+      final response = await dio.get(Routes.user, options: Header.head());
+      if (response.statusCode == 200) {
+        return response.data['data'];
       }
     } on DioException catch (e) {
       DioHandler(e).handler();

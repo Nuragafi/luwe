@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luwe/core/provider/auth_provider.dart';
+import 'package:luwe/core/provider/explore_provider.dart';
+import 'package:luwe/core/provider/recipe_provider.dart';
 import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/view/splashscreen.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => RecipeProvider()),
+        ChangeNotifierProvider(create: (_) => ExploreProvider()),
+      ],
       child: MaterialApp(
         navigatorKey: nav.nk,
         title: 'Luwe',

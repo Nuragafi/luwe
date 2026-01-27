@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:luwe/core/provider/auth_provider.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/constant.dart';
 import 'package:luwe/ui/view/onboarding.dart';
+import 'package:provider/provider.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -21,10 +23,7 @@ class _SplashscreenState extends State<Splashscreen> {
         start = true;
       });
       Timer(const Duration(seconds: 1), () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Onboarding()),
-        );
+        Provider.of<AuthProvider>(context, listen: false).checkAuth();
       });
     });
   }

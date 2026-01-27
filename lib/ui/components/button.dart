@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double height;
   final Color? color;
+  final BoxShape shape;
   const CustomButton({
     super.key,
     required this.onTap,
@@ -16,6 +17,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.height = 50,
     this.color,
+    this.shape = BoxShape.rectangle,
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color ?? ColorAsset.primary,
           borderRadius: BorderRadius.circular(radius),
+          shape: shape,
         ),
         child: child,
       ),

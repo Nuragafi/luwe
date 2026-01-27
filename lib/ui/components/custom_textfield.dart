@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   final double? horizontalPadding;
   final double? verticalPadding;
   final TextInputType? keyboardType;
+  final TextStyle? style;
   const CustomTextField({
     super.key,
     this.controller,
@@ -46,6 +47,7 @@ class CustomTextField extends StatelessWidget {
     this.horizontalPadding,
     this.verticalPadding,
     this.keyboardType,
+    this.style,
   });
 
   @override
@@ -54,6 +56,7 @@ class CustomTextField extends StatelessWidget {
       height: height,
       width: width,
       child: TextFormField(
+        style: style,
         expands: expands ?? false,
         maxLines: maxLines,
         readOnly: readOnly ?? false,

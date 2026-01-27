@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:luwe/core/provider/auth_provider.dart';
 import 'package:luwe/core/utils/color_asset.dart';
-import 'package:luwe/core/utils/navigation.dart';
 import 'package:luwe/ui/components/button.dart';
-import 'package:luwe/ui/view/auth/login.dart';
+import 'package:provider/provider.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -33,7 +33,7 @@ class _ProfilState extends State<Profil> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigation().goPush(const Login(), context);
+              Provider.of<AuthProvider>(context, listen: false).logout();
             },
             icon: const Icon(Icons.logout, color: Colors.black),
           ),
@@ -50,11 +50,14 @@ class _ProfilState extends State<Profil> {
                 CircleAvatar(
                   radius: 70,
                   backgroundColor: Colors.blueGrey,
-                  child: Icon(Icons.person, size: 75, color: Colors.white),
+                  backgroundImage: NetworkImage(
+                    Provider.of<AuthProvider>(context).user?.profilePicture ??
+                        'https://via.placeholder.com/150', // Default image if none provided
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'User',
+                  Provider.of<AuthProvider>(context).user?.name ?? 'User Name',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 10),
@@ -159,7 +162,7 @@ class _ProfilState extends State<Profil> {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.2),
+                      color: Colors.black.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),

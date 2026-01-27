@@ -1,22 +1,25 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:luwe/core/model/recipe_model.dart';
 import 'package:luwe/core/utils/color_asset.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class ResepCard extends StatelessWidget {
-  const ResepCard({super.key});
+  final double? width;
+  final Recipe recipe;
+  final VoidCallback? onTap;
+  const ResepCard({super.key, required this.recipe, this.width, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: (MediaQuery.of(context).size.width - 70) / 2,
+      width: width ?? (MediaQuery.of(context).size.width - 70) / 2,
       height: 240,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
-          image: NetworkImage(
-            'https://dcostseafood.id/wp-content/uploads/2021/12/Nasi-Goreng-Tom-Yum.jpg',
-          ),
+          image: NetworkImage(recipe.thumbnailUrl!),
           fit: BoxFit.cover,
         ),
       ),
@@ -36,18 +39,28 @@ class ResepCard extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.centerRight,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: ColorAsset.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
+              child: GestureDetector(
+                onTap: onTap,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        color: ColorAsset.white.withValues(alpha: 0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        recipe.isFavorited ?? false
+                            ? PhosphorIcons.bookmarkSimple(
+                              PhosphorIconsStyle.fill,
+                            )
+                            : PhosphorIcons.bookmarkSimple(),
+                        color: ColorAsset.white,
+                      ),
                     ),
-                    child: Icon(Icons.bookmark_border, color: ColorAsset.white),
                   ),
                 ),
               ),
@@ -62,14 +75,16 @@ class ResepCard extends StatelessWidget {
                 ),
                 SizedBox(width: 5),
                 Text(
-                  '20 Menit',
+                  '${recipe.cookingTime} Menit',
                   style: TextStyle(fontSize: 14, color: ColorAsset.lightGrey),
                 ),
               ],
             ),
             SizedBox(height: 5),
             Text(
-              'Nasi Goreng Ati Ampela',
+              recipe.title!,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 14, color: ColorAsset.white),
             ),
           ],

@@ -1,16 +1,23 @@
 class AlatModel {
-  final String? id;
+  final int? id;
   final String? name;
-  final String? description;
-  final String? jumlah;
+  final int? jumlah;
+  final Map<String, dynamic>? pivot;
 
-  AlatModel({this.id, this.name, this.description, this.jumlah});
+  AlatModel({this.id, this.name, this.jumlah, this.pivot});
 
-  factory AlatModel.fromJson(Map<String, dynamic> json) {
-    return AlatModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String,
-    );
-  }
+  factory AlatModel.fromJson(Map<String, dynamic> json) => AlatModel(
+    id: json['id'],
+    name: json['name'],
+    jumlah: json['jumlah'] ?? 0,
+    pivot:
+        json['pivot'] != null ? Map<String, dynamic>.from(json['pivot']) : null,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'jumlah': jumlah,
+    'pivot': pivot != null ? Map<String, dynamic>.from(pivot!) : null,
+  };
 }

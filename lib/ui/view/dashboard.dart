@@ -25,12 +25,12 @@ class _DashboardState extends State<Dashboard> {
   final pages = [const Home(), const Explore(), const Notif(), const Profil()];
   @override
   void initState() {
-    // if (storage.token == null) {
-    //   pages.removeLast();
-    //   pages.removeLast();
-    //   pages.add(const Login());
-    //   pages.add(const Login());
-    // }
+    if (storage.token == null) {
+      pages.removeLast();
+      pages.removeLast();
+      pages.add(const Login());
+      pages.add(const Login());
+    }
     super.initState();
   }
 
@@ -82,12 +82,12 @@ class _DashboardState extends State<Dashboard> {
             ),
             InkWell(
               onTap: () {
-                Navigation().goPush(const Tambah(), context);
-                // if (storage.token != null) {
-                //   Navigation().goPush(const Tambah(), context);
-                // } else {
-                //   Navigation().goPush(const Login(), context);
-                // }
+                // Navigation().goPush(const Tambah(), context);
+                if (storage.token != null) {
+                  Navigation().goPush(const Tambah(), context);
+                } else {
+                  Navigation().goPush(const Login(), context);
+                }
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 15),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luwe/core/storage/storage_manager.dart';
 import 'package:luwe/core/utils/color_asset.dart';
 import 'package:luwe/core/utils/constant.dart';
 import 'package:luwe/core/utils/navigation.dart';
@@ -113,6 +114,7 @@ class _OnboardingState extends State<Onboarding> {
                     children: [
                       InkWell(
                         onTap: () {
+                          StorageManager.setOnBoard(false);
                           Navigation().goRemove(const Dashboard(), context);
                         },
                         child: Text(
@@ -127,6 +129,7 @@ class _OnboardingState extends State<Onboarding> {
                       Spacer(),
                       InkWell(
                         onTap: () {
+                          StorageManager.setOnBoard(false);
                           Navigation().goRemove(const Login(), context);
                         },
                         child: Container(
